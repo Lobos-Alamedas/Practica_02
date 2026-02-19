@@ -1,46 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos html</title>
+  <title>Formulario a Google Sheets</title>
 </head>
 <body>
-
-<form id="form">
-  <input type="text" id="nombre" placeholder="Nombre" required>
-  <input type="email" id="email" placeholder="Email" required>
-  <textarea id="mensaje" placeholder="Mensaje"></textarea>
-  <button type="submit">Enviar</button>
-</form>
-
-<script>
-  const scriptURL = "https://script.google.com/macros/s/AKfycbybIgbKcfNqt8e5RMva-GnoFPHiJa4cK8ZnJ_1jk0gZThUYcNG1PaHU_WB1JNIB6-2C5Q/exec"; // pega aquí la URL del paso 1
-  const form = document.getElementById("form");
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const data = {
-      nombre: document.getElementById("nombre").value,
-      email: document.getElementById("email").value,
-      mensaje: document.getElementById("mensaje").value
-    };
-
-    fetch(scriptURL, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    .then(res => res.text())
-    .then(msg => alert(msg))
-    .catch(err => console.error(err));
-
-    alert("Formulario enviado");
-
-  });
-</script>
+  <form id="myForm">
+    <label>Nombre:</label>
+    <input type="text" name="name" required><br><br>
     
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
+    
+    <label>Mensaje:</label>
+    <textarea name="message" required></textarea><br><br>
+    
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const scriptURL = "TU_URL_DE_APPS_SCRIPT"; // pega aquí la URL del paso 2
+    const form = document.getElementById("myForm");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      .then(response => alert("Datos enviados correctamente"))
+      .catch(error => alert("Error al enviar: " + error.message));
+    });
+  </script>
 </body>
 </html>
