@@ -29,14 +29,19 @@
         message: form.message.value
       };
 
-      fetch(scriptURL, {
-        method: "POST",
-        body: JSON.stringify(data)
-      })
-      .then(response => alert("Datos enviados correctamente"))
-      .catch(error => alert("Error al enviar: " + error.message));
-    });
+fetch(scriptURL, {
+  method: "POST",
+  mode: "no-cors", // evita bloqueo por CORS
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
+.then(() => alert("Datos enviados correctamente"))
+.catch(error => alert("Error al enviar: " + error.message));
+      
   </script>
 </body>
 </html>
+
 
